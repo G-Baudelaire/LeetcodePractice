@@ -12,6 +12,6 @@ class Solution:
             output.extend([nums[i]] + end for end in endings)
         return output
 
-
-nums = [1, 2, 3]
-print(Solution().permute(nums))
+if __name__ == '__main__':
+    nums = [1, 2, 3]
+    print(Solution().permute(nums))
