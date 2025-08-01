@@ -4,7 +4,7 @@ project(LeetcodePractice)
 set(CMAKE_CXX_STANDARD 26)
 
 add_executable(
-        LeetcodePractice main.cpp
+        CppPractice main.cpp
         Solution9.cpp
         Solution9.h
         Solution14.h
@@ -14,8 +14,9 @@ add_executable(
         Solution27.h
         Solution28.h
         Solution56.h
-        Solution169.h
         Solution121.h
+        Solution125.h
+        Solution169.h
 )
 
 include_directories(.)
