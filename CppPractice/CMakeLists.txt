@@ -17,6 +17,8 @@ add_executable(
         Solution121.h
         Solution125.h
         Solution169.h
+        Solution383.h
+        Solution205.h
 )
 
 include_directories(.)
