@@ -8,9 +8,9 @@
 
 class Solution27 {
 public:
-    int removeElement(vector<int> &nums, int val) {
-        auto iterator = std::remove(nums.begin(), nums.end(), val);
-        return static_cast<int>(std::distance(nums.begin(), iterator));
-    }
+  int removeElement(vector<int> &nums, int val) {
+    auto iterator = std::remove(nums.begin(), nums.end(), val);
+    return static_cast<int>(std::distance(nums.begin(), iterator));
+  }
 };
 #endif //SOLUTION27_H

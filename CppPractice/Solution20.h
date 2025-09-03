@@ -9,26 +9,26 @@
 
 class Solution {
 public:
-    bool isValid(string s) {
-        std::stack<char> opening_stack;
-        std::unordered_map<char, char> matching{{'(', ')'}, {'[', ']'}, {'{', '}'}};
+  bool isValid(string s) {
+    std::stack<char> opening_stack;
+    std::unordered_map<char, char> matching{{'(', ')'}, {'[', ']'}, {'{', '}'}};
 
-        for (char character: s) {
-            if (character == '(' || character == '{' || character == '[') {
-                opening_stack.push(character);
-                continue;
-            }
+    for (char character: s) {
+      if (character == '(' || character == '{' || character == '[') {
+        opening_stack.push(character);
+        continue;
+      }
 
-            if (opening_stack.empty()) return false;
+      if (opening_stack.empty()) return false;
 
-            char top = opening_stack.top();
-            if (matching[top] != character) return false;
+      char top = opening_stack.top();
+      if (matching[top] != character) return false;
 
-            opening_stack.pop();
-        }
-
-        return opening_stack.empty();
+      opening_stack.pop();
     }
+
+    return opening_stack.empty();
+  }
 };
 
 #endif //SOLUTION20_H
