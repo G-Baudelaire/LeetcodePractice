@@ -9,11 +9,12 @@
 #include <vector>
 
 class Solution26 {
-    public:
-        int removeDuplicates(std::vector<int> &nums) {
-            auto it = std::unique(nums.begin(), nums.end());
-            return static_cast<int>(std::distance(nums.begin(), it));
-        }
-    };
+public:
+  int removeDuplicates(std::vector<int> &nums) {
+    auto it = std::unique(nums.begin(), nums.end());
+    return static_cast<int>(std::distance(nums.begin(), it));
+  }
+};
+
 };
 #endif //SOLUTION26_H
