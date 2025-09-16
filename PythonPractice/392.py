@@ -6,4 +6,4 @@ class Solution:
                 pointer1 += 1
             pointer2 += 1
 
-        return bool(pointer1 == len(s))
+        return pointer1 == len(s)
