@@ -1,14 +1,13 @@
 class Solution:
     def reverseVowels(self, s: str) -> str:
-        stack = []
-        vowels = "AEIOUaeiou"
+        vowels = {"A", "E", "I", "O", "U", "a", "e", "i", "o", "u"}
+        stack = [char for char in s if char in vowels]
+
         output = ""
-
-        for character in s:
-            if character in vowels:
-                stack.append(character)
-
         for index in range(len(s)):
-            output += stack.pop() if s[index] in vowels else s[index]
+            if s[index] not in vowels:
+                output += s[index]
+            else:
+                output += stack.pop()
 
         return output

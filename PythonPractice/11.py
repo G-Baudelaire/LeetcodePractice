@@ -4,25 +4,15 @@ from typing import List
 
 class Solution:
     def maxArea(self, height: List[int]) -> int:
-        max_area = 0
-        left_pointer = 0
-        right_pointer = len(height) - 1
-        distance = right_pointer
+        left, right = 0, len(height) - 1
+        max_water = 0
 
-        while distance > 0:
-            new_area = distance * min(height[left_pointer], height[right_pointer])
-            if new_area > max_area:
-                max_area = new_area
-
-            if height[left_pointer] < height[right_pointer]:
-                left_pointer += 1
+        while left < right:
+            water = (right - left) * min(height[left], height[right])
+            max_water = max(max_water, water)
+            if height[left] < height[right]:
+                left += 1
             else:
-                right_pointer -= 1
+                right -= 1
 
-            distance -= 1
-        return max_area
-
-
-if __name__ == '__main__':
-    height = [1, 2, 4, 3]
-    print(Solution().maxArea(height))
+        return max_water
