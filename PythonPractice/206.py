@@ -11,8 +11,9 @@ class ListNode:
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         previous = None
-
-        while (head is not None):
-            head.next, head, previous = previous, head.next, head
-
-        return previous
+        while head:
+            temp = head.next
+            head.next = previous
+            previous = head
+            head = temp
+        return head
