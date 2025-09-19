@@ -16,4 +16,4 @@ class Solution:
             head.next = previous
             previous = head
             head = temp
-        return head
+        return previous

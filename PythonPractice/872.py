@@ -12,23 +12,22 @@ class TreeNode:
 
 class Solution:
     def leafSimilar(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        dummy_node = TreeNode(val=None)
-        for leaf1, leaf2, in zip_longest(self.getLeaves(root1), self.getLeaves(root2), fillvalue=dummy_node):
-            print(leaf1, leaf2)
-            if leaf1.val != leaf2.val:
+        for leaf1, leaf2 in zip_longest(self.leaves(root1), self.leaves(root2), fillvalue=None):
+            if leaf1 != leaf2:
                 return False
         return True
 
-    def getLeaves(self, root):
-        queue = [root]
-        while queue:
-            node = queue.pop()
-            if not node.left and not node.right:
-                yield node
+    def leaves(self, root: Optional[TreeNode]):
+        stack = [root] if root else []
+        while stack:
+            node = stack.pop()
+
+            if not (node.left or node.right):
+                yield node.val
                 continue
 
             if node.right:
-                queue.append(node.right)
+                stack.append(node.right)
 
             if node.left:
-                queue.append(node.left)
+                stack.append(node.left)
