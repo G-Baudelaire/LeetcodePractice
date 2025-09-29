@@ -1,8 +1,9 @@
 # Single Number
+import operator
+from functools import reduce
+from typing import List
+
 
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        state = nums[0]
-        for num in nums[1:]:
-            state = state ^ num
-        return state
+        return reduce(operator.xor, nums, 0)
