@@ -1,15 +1,11 @@
-class Solution(object):
-    def rob(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
-        if  len(nums) == 1:
-            return nums[0]
+from typing import List
 
-        p_minus_2, p_minus_1 = nums[0], max(nums[0], nums[1])
-        maximum = p_minus_1
-        for i in range(2, len(nums)):
-            maximum = max(p_minus_2 + nums[i], p_minus_1)
-            p_minus_2, p_minus_1 = p_minus_1, maximum
-        return maximum
+
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        dp = [0] * len(nums)
+        prev1, prev2 = 0, 0
+        for i in range(len(nums)):
+            dp[i] = max(prev1, prev2 + nums[i])
+            prev1, prev2 = dp[i], prev1
+        return dp[-1]
