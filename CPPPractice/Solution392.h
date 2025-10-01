@@ -10,14 +10,12 @@ using std::string;
 class Solution {
 public:
   bool isSubsequence(string s, string t) {
-    int index_s, index_t;
-
-    for (index_s = 0, index_t = 0; index_s < s.size() && index_t < t.size();
-         index_t++) {
-      if (s[index_s] == t[index_t]) index_s++;
+    int pointer_s = 0, pointer_t = 0;
+    while (pointer_s < s.size() && pointer_t < t.size()) {
+      if (s[pointer_s] == t[pointer_t]) pointer_s++;
+      pointer_t++;
     }
-
-    return index_s == s.size();
+    return pointer_s;
   }
 };
 

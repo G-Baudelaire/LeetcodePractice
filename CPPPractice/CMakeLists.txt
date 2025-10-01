@@ -20,6 +20,7 @@ add_executable(
         Solution202.h
         Solution205.h
         Solution219.h
+        Solution345.h
         Solution383.h
         Solution392.h
         Solution151.h
@@ -27,6 +28,12 @@ add_executable(
         Solution1071.h
         Solution1431.h
         Solution605.h
+  Solution238.h
+  Solution334.h
+  Solution443.h
+  Solution283.h
+  Solution11.h
+  Solution1679.h
 )
 
 include_directories(.)

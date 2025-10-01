@@ -4,44 +4,33 @@
 
 #ifndef SOLUTION151_H
 #define SOLUTION151_H
+#include <stack>
 #include <string>
-#include <vector>
 
 using std::string;
 
-class Solution151 {
+class Solution {
 public:
-  string reverseWords(string s) {
-    std::string output;
-    std::vector<std::string> strings;
-    bool inWord = false;
-    int start = 0;
+    string reverseWords(string s) {
+        std::stack<string> words;
 
-    for (int i = 0; i < s.size(); i++) {
-      bool isSpace = s[i] == ' ';
-      if (inWord && isSpace) {
-        strings.push_back(s.substr(start, i - start));
-        inWord = false;
-      }
-      if (!inWord && !isSpace) {
-        start = i;
-        inWord = true;
-      }
+        auto pointer = s.find(' ');
+        while (pointer != string::npos) {
+            string substring = s.substr(0, pointer);
+            if (!substring.empty()) words.push(substring);
+            s.erase(0, substring.length() + 1);
+            pointer = s.find(' ');
+        }
+        if (!s.empty()) words.push(s);
+        string result;
+
+        while (!words.empty()) {
+            if (!result.empty()) result.push_back(' ');
+            result.append(words.top());
+            words.pop();
+        }
+
+        return result;
     }
-
-    if (inWord) {
-      strings.push_back(s.substr(start, s.size() - start));
-    }
-
-    for (size_t i = strings.size(); i > 0; i--) {
-      if (!output.empty()) {
-        output.append(" ");
-      }
-      output.append(strings[i - 1]); // fixed index
-    }
-
-    return output;
-  }
 };
-
 #endif //SOLUTION151_H
