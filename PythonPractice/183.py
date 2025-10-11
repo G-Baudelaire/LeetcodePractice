@@ -2,6 +2,10 @@ import pandas as pd
 
 
 def find_customers(customers: pd.DataFrame, orders: pd.DataFrame) -> pd.DataFrame:
-    output = customers[~customers["id"].isin(orders["customerId"])]
-    output = output.rename(columns={"name": "Customers"})
-    return output[["Customers"]]
+    mask = ~customers["id"].isin(orders["customerId"])
+    return (
+        customers[mask]
+        [["name"]]
+        .rename(columns={"name": "Customsers"})
+        .reset_index(drop=True)
+    )
