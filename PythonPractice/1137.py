@@ -5,9 +5,7 @@ class Solution:
         if n in (0, 1, 2):
             return dp[n]
 
-        term = 2
-        while (n != term):
+        for _ in range(n - 2):
             dp = [dp[1], dp[2], sum(dp)]
-            term += 1
 
         return dp[-1]
