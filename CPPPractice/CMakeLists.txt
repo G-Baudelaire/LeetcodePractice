@@ -34,6 +34,12 @@ add_executable(
   Solution283.h
   Solution11.h
   Solution1679.h
+  Solution643.h
+  Solution1456.h
+  Solution1004.h
+  1732.h
+  Solution724.h
+  2215.h
 )
 
 include_directories(.)
