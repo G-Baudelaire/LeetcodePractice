@@ -40,6 +40,7 @@ add_executable(
   1732.h
   Solution724.h
   2215.h
+  Solution67.h
 )
 
 include_directories(.)
