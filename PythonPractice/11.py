@@ -1,18 +1,11 @@
-# Container With Most Water
-from typing import List
+import operator
+from functools import reduce
 
 
 class Solution:
-    def maxArea(self, height: List[int]) -> int:
-        left, right = 0, len(height) - 1
-        max_water = 0
+    def findTheDifference(self, s: str, t: str) -> str:
+        # Unnecessarily hard to read but it was fun to write
+        return chr(reduce(operator.xor, map(ord, s + t), 0))
 
-        while left < right:
-            water = (right - left) * min(height[left], height[right])
-            max_water = max(max_water, water)
-            if height[left] < height[right]:
-                left += 1
-            else:
-                right -= 1
-
-        return max_water
+if __name__ == '__main__':
+    Solution().findTheDifference("abc", "abcd")
