@@ -12,32 +12,16 @@ class ListNode:
 class Solution:
     def reverseBetween(self, head: Optional[ListNode], left: int, right: int) -> Optional[ListNode]:
         dummy = ListNode(next=head)
-        node = dummy
+        previous = dummy
 
-        for i in range(left - 1):
-            node = node.next
-        prefix = node
-        reversed_head = node.next
+        for _ in range(left - 1):
+            previous = previous.next
 
-        for _ in range(right - left + 1):
-            node = node.next
-        suffix = node.next
-        node.next = None
-
-        reversed_head, reversed_tail = self.reverseLinkedList(reversed_head)
-        prefix.next = reversed_head
-        reversed_tail.next = suffix
+        current = previous.next
+        for _ in range(right - left):
+            nxt = current.next
+            current.next = nxt.next
+            nxt.next = current
+            previous.next = nxt
 
         return dummy.next
-
-    def reverseLinkedList(self, head: Optional[ListNode]):
-        previous_node = None
-        node = head
-
-        while node is not None:
-            temp = node.next
-            node.next = previous_node
-            previous_node = node
-            node = temp
-
-        return previous_node, head
