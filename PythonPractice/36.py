@@ -1,60 +1,78 @@
 class Solution(object):
+    BOARD_SIZE = 9
+
+    def __init__(self):
+        self.board = None
+
     def isValidSudoku(self, board):
         """
         :type board: List[List[str]]
         :rtype: bool
         """
+        self.board = board
 
-        for i in range(9):
-            if not self.isRowValid(i, board):
-                return False
+        if self._areRowsValid() and self._areColumnsValid() and self._areSubBoxesValid():
+            return True
+        return False
 
-            if not self.isColumnValid(i, board):
-                return False
+    def _areRowsValid(self):
+        rows = (self._getRow(i) for i in range(self.BOARD_SIZE))
+        return self._areSectionsValid(rows)
 
-            if not self.isSquareValid(i, board):
+    def _areColumnsValid(self):
+        columns = (self._getColumn(i) for i in range(self.BOARD_SIZE))
+        return self._areSectionsValid(columns)
+
+    def _areSubBoxesValid(self):
+        sub_boxes = (self._getSubBox(i) for i in range(self.BOARD_SIZE))
+        return self._areSectionsValid(sub_boxes)
+
+    def _areSectionsValid(self, sections):
+        for section in sections:
+            if not self._isSectionValid(section):
                 return False
         return True
 
-    def isRowValid(self, row, board):
-        for number in set(board[row]).difference({"."}):
-            if 1 != board[row].count(number):
+    def _isSectionValid(self, section):
+        for number in set(section).difference({"."}):
+            if 1 != section.count(number):
                 return False
-
         return True
 
-    def isColumnValid(self, column, board):
-        column_numbers = [board[i][column] for i in range(9)]
+    def _getRow(self, row_index):
+        return self.board[row_index]
 
-        for number in set(column_numbers).difference({"."}):
-            if 1 != column_numbers.count(number):
-                return False
+    def _getColumn(self, column_index):
+        return [self.board[i][column_index] for i in range(self.BOARD_SIZE)]
 
-        return True
+    def _getSubBox(self, sub_box_index):
+        top_left_index = self._threeByThree1DTo2D(sub_box_index)
+        sub_box = [0] * 9
+        for i in range(self.BOARD_SIZE):
+            offset = self._getOffset(i)
+            sub_box[i] = self._boardValueFromTopLeftAndOffset(top_left_index, offset)
+        return sub_box
 
-    def isSquareValid(self, square, board):
-        starting_column = (square % 3) * 3
-        starting_row = (square // 3) * 3
-        square_numbers = [-1] * 9
+    def _threeByThree1DTo2D(self, sub_box_index):
+        return (sub_box_index // 3) * 3, (sub_box_index % 3) * 3
 
-        for i in range(9):
-            square_numbers[i] = board[starting_row + i // 3][starting_column + i % 3]
+    def _getOffset(self, value):
+        return value // 3, value % 3
 
-        for number in set(square_numbers).difference({"."}):
-            if 1 != square_numbers.count(number):
-                return False
-
-        return True
+    def _boardValueFromTopLeftAndOffset(self, top_left, offset):
+        row = top_left[0] + offset[0]
+        column = top_left[1] + offset[1]
+        return self.board[row][column]
 
 
-board = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
-         ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-         [".", "9", "8", ".", ".", ".", ".", "6", "."],
-         ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-         ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-         ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-         [".", "6", ".", ".", ".", ".", "2", "8", "."],
-         [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-         [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
+test_board = [["5", "3", ".", ".", "7", ".", ".", ".", "."],
+              ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+              [".", "9", "8", ".", ".", ".", ".", "6", "."],
+              ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+              ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+              ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+              [".", "6", ".", ".", ".", ".", "2", "8", "."],
+              [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+              [".", ".", ".", ".", "8", ".", ".", "7", "9"]]
 
-print(Solution().isValidSudoku(board))
+print(Solution().isValidSudoku(test_board))

@@ -1,19 +1,16 @@
-class Solution(object):
-    def merge(self, intervals):
-        """
-        :type intervals: List[List[int]]
-        :rtype: List[List[int]]
-        """
-        if not intervals:
-            return []
+from typing import List
 
-        intervals.sort(key=lambda x: x[0])
-        output = [intervals[0]]
 
-        for i in range(1, len(intervals)):
-            if intervals[i][0] <= output[-1][1]:
-                output[-1][1] = max(intervals[i][0], output[-1][1])
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        sorted_intervals = self._sort_intervals_by_start(intervals)
+        merged_intervals = []
+        for interval in sorted_intervals:
+            if not merged_intervals or merged_intervals[-1][1] < interval[0]:
+                merged_intervals.append(interval)
             else:
-                output.append(intervals[i])
+                merged_intervals[-1][1] = max(merged_intervals[-1][1], interval[1])
+        return merged_intervals
 
-        return output
+    def _sort_intervals_by_start(self, intervals: List[List[int]]):
+        return sorted(intervals, key=lambda interval: interval[0])
