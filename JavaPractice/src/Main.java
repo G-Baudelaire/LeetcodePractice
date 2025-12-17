@@ -1,7 +1,6 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        new Solution9().isPalindrome(-121);
-    }
+  public static void main(String[] args) {
+    new Solution7().reverse(8);
+    new Solution7().reverse(-8);
+  }
 }
